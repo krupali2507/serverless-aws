@@ -1,0 +1,53 @@
+service: serverless-restapi
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: ap-south-1
+
+functions:
+  # hello:
+  #   handler: handler.hello
+  #   events:
+  #     - http:
+  #         path: hello
+  #         method: get
+
+  create:
+    handler: handler.create
+    events:
+      - http:
+          path: notes
+          method: post
+
+  getOne:
+    handler: handler.getOne
+    events:
+      - http:
+          path: notes/{id}
+          method: get
+
+  getAll:
+    handler: handler.getAll
+    events:
+      - http:
+          path: notes
+          method: get
+
+  update:
+    handler: handler.update
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+
+  deleteOne:
+    handler: handler.deleteOne
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
+
+plugins:
+  - serverless-offline
